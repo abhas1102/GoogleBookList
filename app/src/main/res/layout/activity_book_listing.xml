@@ -6,34 +6,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.android.booklistingapp.BookListing">
-
     <EditText
         android:id="@+id/search_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search for books or Author"
-
-
-        />
-
+        android:hint="Search for books or Author" />
     <Button
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
        />
-
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
     <TextView
         android:id="@+id/empty_books_list"
         android:text="empty_book_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal" />
-
-
 </LinearLayout>

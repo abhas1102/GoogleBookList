@@ -22,6 +22,7 @@ public class BookListing extends AppCompatActivity {
 
     private ListView mListView;
     private BooksAdapter mBooksAdapter;
+    Context context = this;
 
     ArrayList<Books> books = new ArrayList<>();
 
@@ -51,13 +52,24 @@ public class BookListing extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
+
                 if (InternetConnection.checkConnection(context)) {
 
 
                 mKeyWord = searchBox.getText().toString();
                 searchBooks();
             }
+
+                else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "No Internet Connection!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context,text,duration);
+                    toast.show();
+                }
         }});
+
 
 
     }
@@ -83,26 +95,5 @@ public class BookListing extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    public class InternetConnection {
 
-        /** CHECK WHETHER INTERNET CONNECTION IS AVAILABLE OR NOT */
-        public static boolean checkConnection(Context context) {
-            final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
-
-            if (activeNetworkInfo != null) { // connected to the internet
-                Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
-
-                if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                    // connected to wifi
-                    return true;
-                } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                    // connected to the mobile provider's data plan
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
 }
