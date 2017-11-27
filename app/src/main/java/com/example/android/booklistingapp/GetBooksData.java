@@ -75,6 +75,9 @@ public  class GetBooksData extends AsyncTask<String ,Void , ArrayList<Books>>{
                         }
                     }
                 }
+                else{
+                    bookAuthor="No Author Found!";
+                }
 
                 // Add book entry for bookList if not already in bookList
                 Books book = new Books(bookAuthor, bookTitle);
