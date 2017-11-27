@@ -18,7 +18,6 @@ public class Books implements Parcelable {
        mBookTitle= bookTitle;
         mBookAuthor = bookAuthor;
     }
-
     private Books(Parcel in) {
 
         mBookTitle = in.readString();
@@ -28,13 +27,9 @@ public class Books implements Parcelable {
     public String getBookTitle(){return mBookTitle;}
     public String getBookAuthor(){return mBookAuthor;}
 
-
-
-
     public int describeContents() {
         return 0;
     }
-
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mBookAuthor);
@@ -45,7 +40,6 @@ public class Books implements Parcelable {
         public Books createFromParcel(Parcel in) {
             return new Books(in);
         }
-
         public Books[] newArray(int size) {
             return new Books[size];
         }

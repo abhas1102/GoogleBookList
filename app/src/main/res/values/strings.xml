@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BookListingApp</string>
+    <string name="empty_list_string">Enter valid text in search box to get results</string>
 </resources>

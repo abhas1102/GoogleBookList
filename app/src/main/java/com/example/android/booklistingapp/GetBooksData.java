@@ -4,18 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -30,7 +26,6 @@ public  class GetBooksData extends AsyncTask<String ,Void , ArrayList<Books>>{
     private final String LOG_TAG = GetBooksData.class.getSimpleName();
 
     private final Context mContext;
-
 
     public GetBooksData(Context context, BookListing bookListing) {
         mContext = context;
@@ -166,7 +161,7 @@ public  class GetBooksData extends AsyncTask<String ,Void , ArrayList<Books>>{
             return getBookDataFromJson(booksJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
-            // If the code didn't successfully get the weather data, there's no point in attempting
+            // If the code didn't successfully get the book data, there's no point in attempting
             // to parse it.
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
