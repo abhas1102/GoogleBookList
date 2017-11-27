@@ -6,14 +6,11 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 
@@ -29,29 +26,6 @@ public class BookListing extends AppCompatActivity {
     ArrayList<Books> books = new ArrayList<>();
 
     private String mKeyWord = "";
-
-    public class InternetConnection {
-
-        /** CHECK WHETHER INTERNET CONNECTION IS AVAILABLE OR NOT and use it in booklisting class*/
-        public static boolean checkConnection(Context context) {
-            final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
-
-            if (activeNetworkInfo != null) { // connected to the internet
-                Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
-
-                if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                    // connected to wifi
-                    return true;
-                } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                    // connected to the mobile provider's data plan
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
 
 
     @Override
@@ -74,11 +48,12 @@ public class BookListing extends AppCompatActivity {
 
         final EditText searchBox = (EditText) findViewById(R.id.search_box);
         Button searchButton = (Button) findViewById(R.id.search_button);
-
         searchButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                if (InternetConnection.checkConnection(context)){
+                if (InternetConnection.checkConnection(context)) {
+
+
                 mKeyWord = searchBox.getText().toString();
                 searchBooks();
             }
@@ -106,5 +81,28 @@ public class BookListing extends AppCompatActivity {
 
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public class InternetConnection {
+
+        /** CHECK WHETHER INTERNET CONNECTION IS AVAILABLE OR NOT */
+        public static boolean checkConnection(Context context) {
+            final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+            if (activeNetworkInfo != null) { // connected to the internet
+                Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
+                if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    // connected to wifi
+                    return true;
+                } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                    // connected to the mobile provider's data plan
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
