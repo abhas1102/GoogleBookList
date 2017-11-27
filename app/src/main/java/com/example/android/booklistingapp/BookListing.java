@@ -1,6 +1,8 @@
 package com.example.android.booklistingapp;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import com.example.android.booklistingapp.InternetConnection;
+
 
 public class BookListing extends AppCompatActivity {
 
@@ -26,6 +29,30 @@ public class BookListing extends AppCompatActivity {
     ArrayList<Books> books = new ArrayList<>();
 
     private String mKeyWord = "";
+
+    public class InternetConnection {
+
+        /** CHECK WHETHER INTERNET CONNECTION IS AVAILABLE OR NOT and use it in booklisting class*/
+        public static boolean checkConnection(Context context) {
+            final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+            if (activeNetworkInfo != null) { // connected to the internet
+                Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
+                if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    // connected to wifi
+                    return true;
+                } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                    // connected to the mobile provider's data plan
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
