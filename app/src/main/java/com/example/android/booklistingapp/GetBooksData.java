@@ -66,11 +66,13 @@ public  class GetBooksData extends AsyncTask<String ,Void , ArrayList<Books>>{
                 bookTitle = volumeInfoJson.getString(BOOK_TITLE);
 
                 JSONArray authorsArray = volumeInfoJson.getJSONArray(BOOK_AUTHOR);
-                for (int j = 0; j < authorsArray.length(); j++) {
-                    if (j == 0) {
-                        bookAuthor += authorsArray.getString(j);
-                    } else {
-                        bookAuthor += ", " + authorsArray.getString(j);
+                if(volumeInfoJson.has("authors")) {
+                    for (int j = 0; j < authorsArray.length(); j++) {
+                        if (j == 0) {
+                            bookAuthor += authorsArray.getString(j);
+                        } else {
+                            bookAuthor += ", " + authorsArray.getString(j);
+                        }
                     }
                 }
 
