@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/empty_books_list"
-        android:text="empty_book_list"
+        android:text="Enter valid text in search box to get results"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal" />
